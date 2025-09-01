@@ -1,10 +1,10 @@
 const { app } = require('@azure/functions');
 
-app.http('teste', {
+app.http('home', {
     methods: ['GET', 'POST'],
     authLevel: 'anonymous',
     handler: async (request, context) => {
 
-        return { body: `Hello world!` };
+        return { body: `Seja bem vindo!` };
     }
 });
