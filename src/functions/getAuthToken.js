@@ -1,10 +1,10 @@
-const { app } = require('@azure/functions');
+const { app } = require('@azure/functions')
 const axios = require('axios')
 
-
 app.http('get-auth-token', {
-    methods: ['GET', 'POST'],
+    methods: ['GET'],
     authLevel: 'anonymous',
+    route: 'auth/get-token',
     handler: async (request, context) => {
 
         const tenantId = '9e55eccf-5e65-4178-98f9-bf59a066ae1a'
@@ -28,6 +28,6 @@ app.http('get-auth-token', {
 
         const { data } = await axios.post(url, params, options)
 
-        return { jsonBody: data };
+        return { jsonBody: data }
     }
-});
+})
