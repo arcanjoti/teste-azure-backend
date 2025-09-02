@@ -8,23 +8,22 @@ app.http('user-update', {
     route: 'user/update/{id:alpha}/',
     handler: async (request, context) => {
         try {
-            const token = request.query.get('token')
-            const { param, value, id } = request.params
+            const { param, value, id, token } = request.params
 
-            console.log(request)
-            // const endPoint = `https://graph.microsoft.com/v1.0`
+            const endPoint = `https://graph.microsoft.com/v1.0`
 
-            // const config = {
-            //     headers: {
-            //         Authorization: `Bearer ${token}`,
-            //     }
-            // }
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            }
 
-            // const body = { [param]: value }
+            const body = { [param]: value }
 
-            // await axios.patch(`${endPoint}/users/${id}`, body, config)
+            await axios.patch(`${endPoint}/users/${id}`, body, config)
 
-            return { body: 'data' }
+            return { jsonBody: { 'sucesso': 'Sucesso!' } }
+
         } catch (error) {
             console.log(error)
             return {

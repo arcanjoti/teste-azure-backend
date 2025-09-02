@@ -27,7 +27,6 @@ app.http('get-auth-token', {
             })
 
             const { data } = await axios.post(url, params, options)
-
             return { jsonBody: data }
 
         } catch (error) {

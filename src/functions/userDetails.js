@@ -3,14 +3,12 @@ const axios = require('axios')
 
 
 app.http('user-details', {
-    methods: ['GET'],
+    methods: ['POST'],
     authLevel: 'anonymous',
-    route: 'user/details/{id:alpha}/',
+    route: 'user/details',
     handler: async (request, context) => {
         try {
-
-            const token = request.query.get('token')
-            const { id } = request.params
+            const { id, token } = request.params
 
             const url = `https://graph.microsoft.com/v1.0/users`
 
