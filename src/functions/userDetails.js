@@ -12,6 +12,8 @@ app.http('user-details', {
 
             const url = `https://graph.microsoft.com/v1.0/users`
 
+            const tes = `https://graph.microsoft.com/v1.0/users/id?$select=customSecurityAttributes`
+
             const config = {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -20,22 +22,26 @@ app.http('user-details', {
 
             const extensionMobilePhone = 'extension_4d1f611a46e5425d849fce6293a0dd70_Celular'
             const extensionDataNascimento = 'extension_4d1f611a46e5425d849fce6293a0dd70_DatadeNascimento'
+            const securityAttributes = 'customSecurityAttributes'
 
             const responseBasic = await axios.get(`${url}/${id}`, config)
 
             const responseMobilePhone = await axios.get(`${url}/${id}?$select=${extensionMobilePhone}`, config)
             const responseDataNascimento = await axios.get(`${url}/${id}?$select=${extensionDataNascimento}`, config)
+            const responseCustom = await axios.get(`${url}/${id}?$select=${securityAttributes}`, config)
 
-            const response = {
-                id: responseBasic.data.id,
-                displayName: responseBasic.data?.displayName,
-                mobilePhone: responseBasic.data?.mobilePhone,
-                mail: responseBasic.data?.mail,
-                extensionCelular: responseMobilePhone.data?.extension_4d1f611a46e5425d849fce6293a0dd70_Celular,
-                extensionDataNascimento: responseDataNascimento.data?.extension_4d1f611a46e5425d849fce6293a0dd70_DatadeNascimento
-            }
 
-            return { jsonBody: response }
+
+            // const response = {
+            //     id: responseBasic.data.id,
+            //     displayName: responseBasic.data?.displayName,
+            //     mobilePhone: responseBasic.data?.mobilePhone,
+            //     mail: responseBasic.data?.mail,
+            //     extensionCelular: responseMobilePhone.data?.extension_4d1f611a46e5425d849fce6293a0dd70_Celular,
+            //     extensionDataNascimento: responseDataNascimento.data?.extension_4d1f611a46e5425d849fce6293a0dd70_DatadeNascimento
+            // }
+
+            return { jsonBody: responseCustom.data }
         } catch (error) {
             console.log(error)
             return {
