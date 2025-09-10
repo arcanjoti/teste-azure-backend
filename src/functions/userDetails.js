@@ -19,11 +19,13 @@ app.http('user-details', {
             }
 
             const extensionMobilePhone = 'extension_4d1f611a46e5425d849fce6293a0dd70_Celular'
+            const extensionDataNascimento = 'extension_4d1f611a46e5425d849fce6293a0dd70_DatadeNascimento'
             const securityAttributes = 'customSecurityAttributes'
 
             const responseBasic = await axios.get(`${url}/${id}`, config)
 
             const responseMobilePhone = await axios.get(`${url}/${id}?$select=${extensionMobilePhone}`, config)
+            const responseDataNascimento = await axios.get(`${url}/${id}?$select=${extensionDataNascimento}`, config)
             const responseSecurity = await axios.get(`${url}/${id}?$select=${securityAttributes}`, config)
 
             const response = {
@@ -32,7 +34,8 @@ app.http('user-details', {
                 mobilePhone: responseBasic.data?.mobilePhone,
                 mail: responseBasic.data?.mail,
                 extensionCelular: responseMobilePhone.data?.extension_4d1f611a46e5425d849fce6293a0dd70_Celular,
-                birthday: responseSecurity.data?.customSecurityAttributes.Trabalhadores.Aniversário,
+                extensionDataNascimento: responseDataNascimento.data?.extension_4d1f611a46e5425d849fce6293a0dd70_DatadeNascimento,
+                birthday: responseSecurity.data.customSecurityAttributes?.Trabalhadores.Aniversário,
             }
 
             return { jsonBody: response }
