@@ -5,7 +5,7 @@ const axios = require('axios')
 app.http('user-update', {
     methods: ['POST'],
     authLevel: 'anonymous',
-    route: 'user/update/{id:alpha}/',
+    route: 'user/update',
     handler: async (request, context) => {
         try {
             const { param, value, id, token } = request.params
